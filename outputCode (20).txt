@@ -1,0 +1,26 @@
+ime do
+        local elapsed = tick() - startTime
+        local progress = math.clamp(elapsed / duration, 0, 1)
+        
+        loadingBar.Size = UDim2.new(progress, 0, 1, 0)
+        percentage.Text = math.floor(progress * 100) .. "%"
+        
+        -- Update status message
+        if elapsed % 30 < 5 then
+            status.Text = statusMessages[math.random(#statusMessages)]
+        end
+        
+        wait(0.1)
+    end
+    
+    loadingBar.Size = UDim2.new(1, 0, 1, 0)
+    percentage.Text = "100%"
+    status.Text = "Loading complete!"
+    
+    wait(2)
+    gui:Destroy()
+    disableCoreGuis()
+end
+
+disableCoreGuis()
+animateLoading()
